@@ -6,7 +6,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-    {{{body}}}
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">{{title}}</a>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <main role="main" class="col-md-12">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Bootstrap Chat</h1>
+          </div>
+
+          {{{body}}}
+
+        </main>
+      </div>
+    </div>
     <script>
       var userName = '';
       var displayName = '';
