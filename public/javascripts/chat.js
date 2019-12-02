@@ -107,7 +107,23 @@ class ChatApp {
     const date = new Date(Date.parse(message.timestamp))
     var output = '';
 
-    return `<p>${sender.display_name} <small>@ ${date.toLocaleString('en-GB')}</small>: ${message.body.text}</p>`;
+    if (user.name === sender.user.name) {
+      output = `<li class="media my-3">` +
+      `<div class="media-body">` +
+      `<h5 class="mt-0 mb-1">${sender.display_name} <small>@ ${date.toLocaleString('en-GB')}</small></h5>` +
+      message.body.text +
+      `</div>` +
+      `</li>`;
+    } else {
+      output = `<li class="media my-3">` +
+      `<div class="media-body text-right">` +
+      `<h5 class="mt-0 mb-1">${sender.display_name} <small>@ ${date.toLocaleString('en-GB')}</small></h5>` +
+      message.body.text +
+      `</div>` +
+      `</li>`;
+    }
+
+    return output;
   }
 }
 
