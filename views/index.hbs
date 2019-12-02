@@ -1,9 +1,13 @@
       <section id="messages">
-        <div id="messageFeed">
-        </div>
+        <ul class="list-unstyled" id="messageFeed">
+        </ul>
 
         <footer>
-          <input type="text" id="messageTextarea">
-          <input type="button" id="send" value="Send" />
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" id="messageTextarea">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" id="send">Send</button>
+            </div>
+          </div>
         </footer>
       </section>
