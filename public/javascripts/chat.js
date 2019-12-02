@@ -98,7 +98,9 @@ class ChatApp {
   memberJoined(member, event) {
     const date = new Date(Date.parse(event.timestamp))
 
-    return `<p>${member.display_name} joined the conversation <small>@ ${date.toLocaleString('en-GB')}</small></p>`;
+    return `<li class="my-2 text-center">` +
+    `<p>${member.display_name} joined the conversation <small>@ ${date.toLocaleString('en-GB')}</small></p>` +
+    `</li>`;
   }
 
   senderMessage(user, sender, message) {
