@@ -109,6 +109,7 @@ class ChatApp {
 
     if (user.name === sender.user.name) {
       output = `<li class="media my-3">` +
+      `<img src="https://api.adorable.io/avatars/64/${btoa(sender.display_name)}.png" class="mr-3" alt="" />` +
       `<div class="media-body">` +
       `<h5 class="mt-0 mb-1">${sender.display_name} <small>@ ${date.toLocaleString('en-GB')}</small></h5>` +
       message.body.text +
@@ -120,6 +121,7 @@ class ChatApp {
       `<h5 class="mt-0 mb-1">${sender.display_name} <small>@ ${date.toLocaleString('en-GB')}</small></h5>` +
       message.body.text +
       `</div>` +
+      `<img src="https://api.adorable.io/avatars/64/${btoa(sender.display_name)}.png" class="ml-3" alt="" />` +
       `</li>`;
     }
 
