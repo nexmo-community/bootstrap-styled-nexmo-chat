@@ -8,6 +8,14 @@ class ChatApp {
     this.authenticateUser();
   }
 
+  isFeedAtBottom() {
+    return (this.messageFeed.offsetHeight+this.messageFeed.scrollTop)===this.messageFeed.scrollHeight;
+  }
+
+  scrollFeedToBottom() {
+    this.messageFeed.scrollTop = this.messageFeed.scrollHeight;
+  }
+
   authenticateUser() {
     this.joinConversation({
       name: userName,
@@ -19,6 +27,8 @@ class ChatApp {
 
   joinConversation(user) {
     var { client_token, conversation_id } = user;
+
+    console.log(client_token);
 
     new NexmoClient({ debug: true })
       .login(client_token)
@@ -39,12 +49,22 @@ class ChatApp {
 
     conversation.on('text', (sender, message) => {
       console.log('*** Message received', sender, message)
+      var feedAtBottom = this.isFeedAtBottom();
       this.messageFeed.innerHTML = this.messageFeed.innerHTML + this.senderMessage(user, sender, message);
+
+      if (feedAtBottom) {
+        this.scrollFeedToBottom();
+      }
     })
 
     conversation.on("member:joined", (member, event) => {
       console.log(`*** ${member.user.name} joined the conversation`)
+      var feedAtBottom = this.isFeedAtBottom();
       this.messageFeed.innerHTML = this.messageFeed.innerHTML + this.memberJoined(member, event);
+
+      if (feedAtBottom) {
+        this.scrollFeedToBottom();
+      }
     })
 
     this.showConversationHistory(conversation, user)
@@ -70,6 +90,8 @@ class ChatApp {
         })
 
         this.messageFeed.innerHTML = eventsHistory + this.messageFeed.innerHTML
+
+        this.scrollFeedToBottom();
       })
       .catch(this.errorLogger)
   }
