@@ -1,6 +1,6 @@
 ![Nexmo][logo]
 
-# Styling Chat with Nexmo's Conversation Client SDK and Bootstrap
+# Create a Simple Chat Interface with Bootstrap
 
 **Table of Contents**
 
@@ -66,13 +66,13 @@ The application you're starting with is a chat application built using Bootstrap
 Clone the demo application straight from GitHub.
 
 ```bash
-git clone https://github.com/nexmo-community/nexmo-chat-typeform-magiclinks.git
+git clone https://github.com/nexmo-community/bootstrap-styled-nexmo-chat.git
 ```
 
 Once cloned, change into the new demo application directory.
 
 ```bash
-cd nexmo-chat-typeform-magiclinks
+cd bootstrap-styled-nexmo-chat
 ```
 
 Install the npm dependencies.
