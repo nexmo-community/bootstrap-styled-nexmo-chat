@@ -28,8 +28,6 @@ class ChatApp {
   joinConversation(user) {
     var { client_token, conversation_id } = user;
 
-    console.log(client_token);
-
     new NexmoClient({ debug: true })
       .login(client_token)
       .then(app => {
