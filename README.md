@@ -6,7 +6,7 @@
 
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
-    - [Node & NPM](#node--npm)
+    - [Node &amp; NPM](#node-amp-npm)
     - [Nexmo Account](#nexmo-account)
     - [Nexmo CLI](#nexmo-cli)
   - [Run the Application](#run-the-application)
@@ -81,13 +81,26 @@ Install the npm dependencies.
 npm install
 ```
 
-Start the application the standard way.
+Configure the application port using an environment file. Copy the example file:
+
+```bash
+cp .env.example .env
+```
+
+Now, edit the environment file `.env` and set the port to 3000 (or whichever port you require).
+
+```env
+# app config
+PORT=3000
+```
+
+To start the application in the standard way, run: 
 
 ```bash
 npm start
 ```
 
-Start the application, but with nodemon instead.
+To start the application, but with nodemon instead, run:
 
 ```bash
 npm run dev
