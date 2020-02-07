@@ -8,6 +8,14 @@ class ChatApp {
     this.authenticateUser();
   }
 
+  isFeedAtBottom() {
+    return (this.messageFeed.offsetHeight+this.messageFeed.scrollTop)===this.messageFeed.scrollHeight;
+  }
+
+  scrollFeedToBottom() {
+    this.messageFeed.scrollTop = this.messageFeed.scrollHeight;
+  }
+
   authenticateUser() {
     this.joinConversation({
       name: userName,
@@ -39,12 +47,22 @@ class ChatApp {
 
     conversation.on('text', (sender, message) => {
       console.log('*** Message received', sender, message)
+      var feedAtBottom = this.isFeedAtBottom();
       this.messageFeed.innerHTML = this.messageFeed.innerHTML + this.senderMessage(user, sender, message);
+
+      if (feedAtBottom) {
+        this.scrollFeedToBottom();
+      }
     })
 
     conversation.on("member:joined", (member, event) => {
       console.log(`*** ${member.user.name} joined the conversation`)
+      var feedAtBottom = this.isFeedAtBottom();
       this.messageFeed.innerHTML = this.messageFeed.innerHTML + this.memberJoined(member, event);
+
+      if (feedAtBottom) {
+        this.scrollFeedToBottom();
+      }
     })
 
     this.showConversationHistory(conversation, user)
@@ -70,6 +88,8 @@ class ChatApp {
         })
 
         this.messageFeed.innerHTML = eventsHistory + this.messageFeed.innerHTML
+
+        this.scrollFeedToBottom();
       })
       .catch(this.errorLogger)
   }
@@ -98,14 +118,34 @@ class ChatApp {
   memberJoined(member, event) {
     const date = new Date(Date.parse(event.timestamp))
 
-    return `<p>${member.display_name} joined the conversation <small>@ ${date.toLocaleString('en-GB')}</small></p>`;
+    return `<li class="my-2 text-center">` +
+    `<p>${member.display_name} joined the conversation <small>@ ${date.toLocaleString('en-GB')}</small></p>` +
+    `</li>`;
   }
 
   senderMessage(user, sender, message) {
     const date = new Date(Date.parse(message.timestamp))
     var output = '';
 
-    return `<p>${sender.display_name} <small>@ ${date.toLocaleString('en-GB')}</small>: ${message.body.text}</p>`;
+    if (user.name === sender.user.name) {
+      output = `<li class="media my-3">` +
+      `<img src="https://api.adorable.io/avatars/64/${btoa(sender.display_name)}.png" class="mr-3" alt="" />` +
+      `<div class="media-body">` +
+      `<h5 class="mt-0 mb-1">${sender.display_name} <small>@ ${date.toLocaleString('en-GB')}</small></h5>` +
+      message.body.text +
+      `</div>` +
+      `</li>`;
+    } else {
+      output = `<li class="media my-3">` +
+      `<div class="media-body text-right">` +
+      `<h5 class="mt-0 mb-1">${sender.display_name} <small>@ ${date.toLocaleString('en-GB')}</small></h5>` +
+      message.body.text +
+      `</div>` +
+      `<img src="https://api.adorable.io/avatars/64/${btoa(sender.display_name)}.png" class="ml-3" alt="" />` +
+      `</li>`;
+    }
+
+    return output;
   }
 }
 
